@@ -3,7 +3,7 @@ package mydb
 import (
    "database/sql"
    _ "github.com/go-sql-driver/mysql"
-   "configuration"
+   "github.com/network4all/configuration"
    "fmt"
 )
 
@@ -18,7 +18,7 @@ func InitConfigSettings(config configuration.Settings) {
    // load database config and create database connection
    var err error
    dbconf = config
-   connectionString := fmt.Sprintf("%s:%s@%s/%s", dbconf.DBuser, dbconf.DBpass, dbconf.DBhost, dbconf.DBname)
+   connectionString := fmt.Sprintf("%s:%s@%s/%s?parseTime=true", dbconf.DBuser, dbconf.DBpass, dbconf.DBhost, dbconf.DBname)
    if (dbdebug) { fmt.Printf ("database module: connection string '%s' configured\n", connectionString) }
    DB, err = sql.Open("mysql", connectionString)
    checkErr(err)
